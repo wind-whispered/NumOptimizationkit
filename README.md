@@ -1,3 +1,3 @@
-# Convex Optimization for Mathematica
+# CvxOptKit
 
-A Wolfram Mathematica package developed for Convex Optimization
+CvxOptKit is a Wolfram Mathematica package that is developed for Convex Optimization
