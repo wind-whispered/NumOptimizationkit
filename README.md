@@ -1,3 +1,3 @@
-# Convex-Optimization
+# Convex Optimization for Mathematica
 
-Develop a Convex Optimization package for Wolfram Mathematica
+A Convex Optimization package developed for Wolfram Mathematica
