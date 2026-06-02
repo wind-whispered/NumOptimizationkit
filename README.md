@@ -1,3 +1,3 @@
 # NumOptimizationkit
 
-A Wolfram Mathematica package developed for Convex Optimization
+NumOptimizationkit is a Wolfram Mathematica package developed for Numerical Optimization.
