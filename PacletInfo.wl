@@ -2,7 +2,6 @@
 
 PacletObject[<|
   "Name"        -> "NumOptimizationkit",
-  "PublisherID" -> "CAI",
   "Version"     -> "1.0.0",
   "Description" -> "Comprehensive numerical optimization and scientific computing toolkit \
 for Mathematica, covering unconstrained and constrained optimization, root-finding, \
