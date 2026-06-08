@@ -8,6 +8,6 @@ linear algebra, interpolation and function approximation.",
   "URL"         -> "",
   "Extensions"  -> {
     {"Kernel", "Root" -> ".", "Context" -> "NumOptimizationkit`"},
-    {"Documentation", Language -> "Chinese"}
+    {"Documentation", Language -> "English"}
   }
 |>]
