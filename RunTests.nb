@@ -1,0 +1,504 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     21231,        496]
+NotebookOptionsPosition[     14108,        391]
+NotebookOutlinePosition[     14628,        410]
+CellTagsIndexPosition[     14585,        407]
+WindowTitle->NumOptimizationkit \:2014 Test Suite Runner
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["NumOptimizationkit \[LongDash] Test Suite Runner", "Title",ExpressionUUID->"de5c06f3-1dc7-4bf2-9587-53d96305b71b"],
+
+Cell["\<\
+This notebook loads the test infrastructure and provides ready-to-run cells \
+for every level of the test suite.  Run cells top-to-bottom on first use; \
+individual sections can be re-run independently afterwards.\
+\>", "Text",ExpressionUUID->"484d8515-580e-4ca1-af89-c53eecc977db"],
+
+Cell[CellGroupData[{
+
+Cell["1  Setup", "Section",ExpressionUUID->"316aec10-e211-47dd-bc04-e0abb6a93114"],
+
+Cell[BoxData[
+ FormBox[
+  RowBox[{"(*", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"MemberQ", "[", 
+       RowBox[{"$Packages", ",", "\"\<NumOptimizationkit`\>\""}], "]"}]}], 
+     ",", 
+     RowBox[{"Get", "[", 
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"ParentDirectory", "[", 
+          RowBox[{"DirectoryName", "[", "$InputFileName", "]"}], "]"}], ",", 
+         "\"\<NumOptimizationkit.wl\>\""}], "}"}], "]"}], "]"}]}], "]"}], 
+   "*)"}], TextForm]], "Input",
+ CellChangeTimes->{
+  3.9898744851229277`*^9, {3.989880231762779*^9, 
+   3.989880251696163*^9}},ExpressionUUID->"16c77288-9f07-48fc-9169-\
+5a0d8b14e181"],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"!", 
+    RowBox[{"MemberQ", "[", 
+     RowBox[{"$Packages", ",", "\"\<NumOptimizationkit`\>\""}], "]"}]}], ",", 
+   RowBox[{"Get", "[", 
+    RowBox[{"SelectFirst", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+           "\"\<NumOptimizationkit.wl\>\""}], "}"}], "]"}], ",", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"ParentDirectory", "[", 
+            RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ",", 
+           "\"\<NumOptimizationkit.wl\>\""}], "}"}], "]"}]}], "}"}], ",", 
+      "FileExistsQ"}], "]"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.989874464397373*^9, 3.9898744643983727`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"31fc35ac-ca1b-434f-bd35-f3e86bf1efe6"],
+
+Cell["\<\
+Load the test runner (defines RunTests, TestCore macros, etc.):\
+\>", "Text",ExpressionUUID->"2816c24b-ebbb-4fe8-8d1c-4ad85d399b27"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Get", "[", 
+  RowBox[{"FileNameJoin", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], ",", " ", "\"\<Tests\>\"", ",", 
+     " ", "\"\<TestRunner.wl\>\""}], "}"}], "]"}], "]"}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"f99a1273-78dc-428c-adac-8f2a10d24bbd"],
+
+Cell[BoxData["\<\"NumOptimizationkit Test Runner ready.  Use RunTests[] to \
+begin.\"\>"], "Print",
+ CellChangeTimes->{
+  3.9898738654580345`*^9, 3.9898739668100996`*^9, {3.9898745097572784`*^9, 
+   3.989874514558563*^9}, 3.9898749372774396`*^9},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[2]:=",ExpressionUUID->"bb9fd0b3-6697-464c-b2c5-\
+73ee1b24e27e"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2  Full Test Suite", "Section",ExpressionUUID->"d5ae2890-8a2a-4e1d-8ffc-64890a505eb5"],
+
+Cell["\<\
+Run all five categories in dependency order:
+  A (Correctness) first
+  C (Robustness) and E (Performance) alongside A
+  B (Convergence) and D (Accuracy) after A, only if A pass rate >= 50%\
+\>", "Text",ExpressionUUID->"cc89bb39-2505-4667-97e6-4719ce499701"],
+
+Cell[BoxData[
+ RowBox[{"RunTests", "[", "]"}]], "Input",ExpressionUUID->"4651e21b-8169-4e9b-9f02-5bb2ca1dd384"],
+
+Cell["Silent mode -- returns True when all pass:", "Text",ExpressionUUID->"a252168e-518a-4db8-8b92-e01c97fd28c5"],
+
+Cell[BoxData[
+ RowBox[{"RunTests", "[", 
+  RowBox[{
+   RowBox[{"\"\<Verbosity\>\"", " ", "->", " ", "0"}], ",", " ", 
+   RowBox[{"\"\<ReportFormat\>\"", " ", "->", " ", "\"\<associations\>\""}]}],
+   "]"}]], "Input",ExpressionUUID->"559c9c93-48db-4e0b-8b07-f26c16003c1e"],
+
+Cell["\<\
+Parallel execution across CPU cores (requires launched sub-kernels):\
+\>", "Text",ExpressionUUID->"7bbf805d-0c95-4c07-ac49-04035801407a"],
+
+Cell[BoxData[
+ RowBox[{"RunTests", "[", 
+  RowBox[{"\"\<Parallel\>\"", " ", "->", " ", "True"}], "]"}]], "Input",Expres\
+sionUUID->"38e88efc-6ea8-45ab-801a-b0341ce8ef9d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["3  Run by Category", "Section",ExpressionUUID->"6630420e-d384-4bd5-b7e8-098c256d16ec"],
+
+Cell["A  --  Correctness (foundation tests for every module):", "Text",ExpressionUUID->"2af15eb9-0667-4198-8813-23b82a33c96d"],
+
+Cell[BoxData[
+ RowBox[{"RunTestCategory", "[", "\"\<A\>\"", "]"}]], "Input",ExpressionUUID->"26c17a6c-3e37-4180-a72d-cd29ae1527c6"],
+
+Cell["B  --  Convergence order (requires A pass rate >= 50%):", "Text",ExpressionUUID->"afb03afb-6444-4f0e-a12f-87a2546dcd1c"],
+
+Cell[BoxData[
+ RowBox[{"RunTestCategory", "[", "\"\<B\>\"", "]"}]], "Input",ExpressionUUID->"76b9474b-f984-41a7-97f8-a1c2a35e03ff"],
+
+Cell["C  --  Robustness / edge cases:", "Text",ExpressionUUID->"fd7e1443-af16-4e09-9219-998c6ebcad9a"],
+
+Cell[BoxData[
+ RowBox[{"RunTestCategory", "[", "\"\<C\>\"", "]"}]], "Input",ExpressionUUID->"976aca8c-6b9e-40ab-bde0-087507cf1c06"],
+
+Cell["D  --  Accuracy benchmarks vs. reference solutions:", "Text",ExpressionUUID->"956a64a0-1703-4479-9602-eb9ba4f104f9"],
+
+Cell[BoxData[
+ RowBox[{"RunTestCategory", "[", "\"\<D\>\"", "]"}]], "Input",ExpressionUUID->"f0353337-78fd-42a1-884c-f667839462b1"],
+
+Cell["\<\
+E  --  Performance regression (compares against Data/PerformanceBaseline.wl):\
+\>", "Text",ExpressionUUID->"30d3b9d9-ae4c-4f2c-a6cc-e923d6b8ac46"],
+
+Cell[BoxData[
+ RowBox[{"RunTestCategory", "[", "\"\<E\>\"", "]"}]], "Input",ExpressionUUID->"70196d2b-bad0-4170-a7c0-dceff5b0607d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["4  Run by Module", "Section",ExpressionUUID->"6f7b8fab-6262-4113-920d-e27edd078d29"],
+
+Cell["\<\
+Run all tests that touch a specific module (both correctness and convergence):\
+\>", "Text",ExpressionUUID->"4f268945-d830-427b-bcd0-e0fc05822c69"],
+
+Cell[BoxData[
+ RowBox[{"RunTestModule", "[", "\"\<ODE\>\"", "]"}]], "Input",ExpressionUUID->"bf38e6aa-9fab-46ec-8ba8-4729a7840a8e"],
+
+Cell[BoxData[
+ RowBox[{"RunTestModule", "[", "\"\<Quadrature\>\"", "]"}]], "Input",Expressio\
+nUUID->"24ce7a8f-ff06-46f5-9bfc-e45a6c3afed1"],
+
+Cell[BoxData[
+ RowBox[{"RunTestModule", "[", "\"\<Optimization\>\"", "]"}]], "Input",Express\
+ionUUID->"d2f40a5d-9b86-40da-ab47-c13143efa3fd"],
+
+Cell[BoxData[
+ RowBox[{"RunTestModule", "[", "\"\<LinearAlgebra\>\"", "]"}]], "Input",Expres\
+sionUUID->"9dfc1f5a-f661-441a-87f8-0697b353a78e"],
+
+Cell[BoxData[
+ RowBox[{"RunTestModule", "[", "\"\<RootFinding\>\"", "]"}]], "Input",Expressi\
+onUUID->"361fb77a-c852-4e2f-b0e9-7d735c3b72e3"],
+
+Cell[BoxData[
+ RowBox[{"RunTestModule", "[", "\"\<NonlinearSystems\>\"", "]"}]], "Input",Exp\
+ressionUUID->"d1a49d5f-ab3d-43f9-873f-c8a0a0047481"],
+
+Cell[BoxData[
+ RowBox[{"RunTestModule", "[", "\"\<PDE\>\"", "]"}]], "Input",ExpressionUUID->"eebaa3af-511f-4e32-86db-2054baa42d0f"],
+
+Cell[BoxData[
+ RowBox[{"RunTestModule", "[", "\"\<Interpolation\>\"", "]"}]], "Input",Expres\
+sionUUID->"c4ec0dbb-bfe3-4727-8b58-412cd4e57985"],
+
+Cell[BoxData[
+ RowBox[{"RunTestModule", "[", "\"\<Approximation\>\"", "]"}]], "Input",Expres\
+sionUUID->"0a046822-5353-41b7-a601-e170a2b9d037"],
+
+Cell[BoxData[
+ RowBox[{"RunTestModule", "[", "\"\<Eigenanalysis\>\"", "]"}]], "Input",Expres\
+sionUUID->"d7199b13-c934-4f10-9d22-ea8713af7cdc"],
+
+Cell[BoxData[
+ RowBox[{"RunTestModule", "[", "\"\<BVP\>\"", "]"}]], "Input",ExpressionUUID->"027b092d-2fa7-4de1-b388-6a23bde5936a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["5  Quick Smoke Test", "Section",ExpressionUUID->"1068c518-306b-4b1a-92f9-b7aa35384ade"],
+
+Cell["Category A only, silent -- returns True if all pass:", "Text",ExpressionUUID->"236ef79f-6b4d-4cff-8cae-d0ba3e14323f"],
+
+Cell[BoxData[
+ RowBox[{"RunQuickTests", "[", "]"}]], "Input",ExpressionUUID->"10fa8b2f-aa14-43bd-9c25-cc97aef99a93"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["6  Analysing Results", "Section",ExpressionUUID->"8a049536-66c9-472f-93d5-23a1e3a5d65d"],
+
+Cell["Per-category pass / fail table:", "Text",ExpressionUUID->"dcfce077-8466-4679-9edc-62cd31ccb99f"],
+
+Cell[BoxData[
+ RowBox[{"NKTestSummary", "[", "]"}]], "Input",ExpressionUUID->"eb41e283-2d02-407c-8888-ee473a30db7a"],
+
+Cell["Full formatted report:", "Text",ExpressionUUID->"d575388b-b473-44c7-8e01-4315d341bbbb"],
+
+Cell[BoxData[
+ RowBox[{"NKReport", "[", "\"\<text\>\"", "]"}]], "Input",ExpressionUUID->"24bd76ce-06ec-4e63-8d1d-d1228b4454ae"],
+
+Cell["Raw result Associations (for programmatic use):", "Text",ExpressionUUID->"7e29ac60-f9a6-4f25-ae4f-24b291fbbab6"],
+
+Cell[BoxData[
+ RowBox[{"NKReport", "[", "\"\<associations\>\"", "]"}]], "Input",ExpressionUU\
+ID->"4853be9a-a079-499c-8eee-206103518a21"],
+
+Cell["Count helpers:", "Text",ExpressionUUID->"0a1f67bc-602c-4ab2-99d1-08b7c62088fc"],
+
+Cell[BoxData[{
+ RowBox[{"NKPassCount", "[", "]"}], "\n", 
+ RowBox[{"NKFailCount", "[", "]"}]}], "Input",ExpressionUUID->"337fb856-f929-\
+4f58-9d75-28df12f6b8e7"],
+
+Cell["Show only failed tests:", "Text",ExpressionUUID->"679205c6-2396-44cc-9f17-10fb015517a5"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Select", "[", 
+   RowBox[{"$NKTestLog", ",", " ", 
+    RowBox[{
+     RowBox[{"!", 
+      RowBox[{"#", "[", "\"\<Pass\>\"", "]"}]}], " ", "&"}]}], "]"}], " ", "//",
+   " ", 
+  RowBox[{"Map", "[", 
+   RowBox[{
+    RowBox[{"KeyTake", "[", 
+     RowBox[{"#", ",", " ", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<Name\>\"", ",", " ", "\"\<Category\>\"", ",", " ", 
+        "\"\<Module\>\"", ",", " ", "\"\<Detail\>\""}], "}"}]}], "]"}], " ", 
+    "&"}], "]"}]}]], "Input",ExpressionUUID->"30ff38cb-3482-47e8-be17-\
+e1f1f14db88d"],
+
+Cell["Show results for one category:", "Text",ExpressionUUID->"60e9e96c-5ea2-41ee-9423-c2ae55171794"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Select", "[", 
+   RowBox[{"$NKTestLog", ",", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"#", "[", "\"\<Category\>\"", "]"}], " ", "===", " ", 
+      "\"\<A\>\""}], " ", "&"}]}], "]"}], " ", "//", " ", "Length"}]], "Input",\
+ExpressionUUID->"1b3e94d2-32ab-41bf-8f87-8f7dc834f8c4"],
+
+Cell["Timing report -- slowest tests first:", "Text",ExpressionUUID->"1ac46988-235d-4c62-9c96-4f824b90f815"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"SortBy", "[", 
+    RowBox[{"$NKTestLog", ",", " ", 
+     RowBox[{
+      RowBox[{"-", 
+       RowBox[{"#", "[", "\"\<Time\>\"", "]"}]}], " ", "&"}]}], "]"}], "[", 
+   RowBox[{"[", 
+    RowBox[{"1", ";;", "10"}], "]"}], "]"}], " ", "//", "   ", 
+  RowBox[{"Map", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"#", "[", "\"\<Name\>\"", "]"}], ",", " ", 
+      RowBox[{"Round", "[", 
+       RowBox[{
+        RowBox[{"#", "[", "\"\<Time\>\"", "]"}], ",", " ", "0.001"}], "]"}]}],
+      "}"}], " ", "&"}], "]"}]}]], "Input",ExpressionUUID->"31bf7080-ad02-\
+4315-be8c-e8995d62c3cf"],
+
+Cell["Clear accumulated results before a fresh run:", "Text",ExpressionUUID->"a31a9ea5-74da-4ca3-8c7f-9e6d9f0d7280"],
+
+Cell[BoxData[
+ RowBox[{"NKClearResults", "[", "]"}]], "Input",ExpressionUUID->"d90afae8-a743-4c6c-a852-1f4217533e90"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["7  Performance Baseline Calibration", "Section",ExpressionUUID->"b3fe5179-6257-4e99-b1ff-027292626ef6"],
+
+Cell["\<\
+Calibrate performance baselines on the current machine.
+Run this once after installing on new hardware, then commit the updated
+Data/PerformanceBaseline.wl to version control.\
+\>", "Text",ExpressionUUID->"f122c931-01d6-4ea8-a0e1-16954fb3e7a7"],
+
+Cell[BoxData[
+ RowBox[{"NKCalibrate", "[", "]"}]], "Input",ExpressionUUID->"71f8f107-8afe-4433-8df2-1a5b5fdb0f51"],
+
+Cell["\<\
+After calibration, re-run Category E to confirm baselines are met:\
+\>", "Text",ExpressionUUID->"69f0fef5-4c84-4d8f-9a68-400a31712081"],
+
+Cell[BoxData[
+ RowBox[{"RunTestCategory", "[", "\"\<E\>\"", "]"}]], "Input",ExpressionUUID->"cb594d03-6bfa-4662-860e-5397e3a15a9b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["8  Test Registry Inspection", "Section",ExpressionUUID->"9bf88a9c-2dd5-4bd0-8592-29b13f972cbc"],
+
+Cell["List all registered test files:", "Text",ExpressionUUID->"0ab1f4de-3bcd-4525-9266-4e6cc7b9ab82"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"$NKTestRegistry", " ", "//", " ", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{"KeyTake", "[", 
+      RowBox[{"#", ",", " ", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<Category\>\"", ",", " ", "\"\<Module\>\"", ",", " ", 
+         "\"\<File\>\""}], "}"}]}], "]"}], " ", "&"}], "]"}]}], " ", "//", 
+  "   ", 
+  RowBox[{
+   RowBox[{"TableForm", "[", 
+    RowBox[{"#", ",", " ", 
+     RowBox[{"TableHeadings", " ", "->", " ", 
+      RowBox[{"{", 
+       RowBox[{"None", ",", " ", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Cat\>\"", ",", " ", "\"\<Module\>\"", ",", " ", 
+          "\"\<File\>\""}], "}"}]}], "}"}]}]}], "]"}], " ", "&"}]}]], "Input",\
+ExpressionUUID->"784aa014-93e2-4f0f-83a7-a63a3e4729f0"],
+
+Cell["Show only Category B entries:", "Text",ExpressionUUID->"8390d479-112b-4366-bb33-9b8659c2cd0f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Select", "[", 
+   RowBox[{"$NKTestRegistry", ",", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"#", "[", "\"\<Category\>\"", "]"}], " ", "===", " ", 
+      "\"\<B\>\""}], " ", "&"}]}], "]"}], " ", "//", " ", 
+  RowBox[{"Map", "[", 
+   RowBox[{
+    RowBox[{"#", "[", "\"\<Module\>\"", "]"}], " ", "&"}], "]"}]}]], "Input",E\
+xpressionUUID->"3cfe0d4b-1710-4b4e-9af2-ca54869a4686"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1200, 721},
+WindowMargins->{{34.5, Automatic}, {Automatic, 0}},
+WindowTitle->"NumOptimizationkit \[LongDash] Test Suite Runner",
+TaggingRules-><|"TryRealOnly" -> False|>,
+FrontEndVersion->"13.0 for Microsoft Windows (64-bit) (2022\:5e742\:67084\
+\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9576aa86-4ccd-4bbe-a29f-5c9a4c8ba0ff"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[637, 23, 120, 0, 98, "Title",ExpressionUUID->"de5c06f3-1dc7-4bf2-9587-53d96305b71b"],
+Cell[760, 25, 292, 4, 58, "Text",ExpressionUUID->"484d8515-580e-4ca1-af89-c53eecc977db"],
+Cell[CellGroupData[{
+Cell[1077, 33, 82, 0, 67, "Section",ExpressionUUID->"316aec10-e211-47dd-bc04-e0abb6a93114"],
+Cell[1162, 35, 694, 20, 28, "Input",ExpressionUUID->"16c77288-9f07-48fc-9169-5a0d8b14e181"],
+Cell[1859, 57, 948, 24, 114, "Input",ExpressionUUID->"31fc35ac-ca1b-434f-bd35-f3e86bf1efe6"],
+Cell[2810, 83, 142, 2, 35, "Text",ExpressionUUID->"2816c24b-ebbb-4fe8-8d1c-4ad85d399b27"],
+Cell[CellGroupData[{
+Cell[2977, 89, 322, 7, 43, "Input",ExpressionUUID->"f99a1273-78dc-428c-adac-8f2a10d24bbd"],
+Cell[3302, 98, 353, 7, 22, "Print",ExpressionUUID->"bb9fd0b3-6697-464c-b2c5-73ee1b24e27e"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3704, 111, 92, 0, 67, "Section",ExpressionUUID->"d5ae2890-8a2a-4e1d-8ffc-64890a505eb5"],
+Cell[3799, 113, 267, 5, 104, "Text",ExpressionUUID->"cc89bb39-2505-4667-97e6-4719ce499701"],
+Cell[4069, 120, 111, 1, 28, "Input",ExpressionUUID->"4651e21b-8169-4e9b-9f02-5bb2ca1dd384"],
+Cell[4183, 123, 113, 0, 35, "Text",ExpressionUUID->"a252168e-518a-4db8-8b92-e01c97fd28c5"],
+Cell[4299, 125, 271, 5, 28, "Input",ExpressionUUID->"559c9c93-48db-4e0b-8b07-f26c16003c1e"],
+Cell[4573, 132, 147, 2, 35, "Text",ExpressionUUID->"7bbf805d-0c95-4c07-ac49-04035801407a"],
+Cell[4723, 136, 170, 3, 43, "Input",ExpressionUUID->"38e88efc-6ea8-45ab-801a-b0341ce8ef9d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4930, 144, 92, 0, 67, "Section",ExpressionUUID->"6630420e-d384-4bd5-b7e8-098c256d16ec"],
+Cell[5025, 146, 126, 0, 35, "Text",ExpressionUUID->"2af15eb9-0667-4198-8813-23b82a33c96d"],
+Cell[5154, 148, 131, 1, 28, "Input",ExpressionUUID->"26c17a6c-3e37-4180-a72d-cd29ae1527c6"],
+Cell[5288, 151, 126, 0, 35, "Text",ExpressionUUID->"afb03afb-6444-4f0e-a12f-87a2546dcd1c"],
+Cell[5417, 153, 131, 1, 28, "Input",ExpressionUUID->"76b9474b-f984-41a7-97f8-a1c2a35e03ff"],
+Cell[5551, 156, 102, 0, 35, "Text",ExpressionUUID->"fd7e1443-af16-4e09-9219-998c6ebcad9a"],
+Cell[5656, 158, 131, 1, 28, "Input",ExpressionUUID->"976aca8c-6b9e-40ab-bde0-087507cf1c06"],
+Cell[5790, 161, 122, 0, 35, "Text",ExpressionUUID->"956a64a0-1703-4479-9602-eb9ba4f104f9"],
+Cell[5915, 163, 131, 1, 28, "Input",ExpressionUUID->"f0353337-78fd-42a1-884c-f667839462b1"],
+Cell[6049, 166, 156, 2, 35, "Text",ExpressionUUID->"30d3b9d9-ae4c-4f2c-a6cc-e923d6b8ac46"],
+Cell[6208, 170, 131, 1, 28, "Input",ExpressionUUID->"70196d2b-bad0-4170-a7c0-dceff5b0607d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6376, 176, 90, 0, 67, "Section",ExpressionUUID->"6f7b8fab-6262-4113-920d-e27edd078d29"],
+Cell[6469, 178, 157, 2, 35, "Text",ExpressionUUID->"4f268945-d830-427b-bcd0-e0fc05822c69"],
+Cell[6629, 182, 131, 1, 28, "Input",ExpressionUUID->"bf38e6aa-9fab-46ec-8ba8-4729a7840a8e"],
+Cell[6763, 185, 140, 2, 28, "Input",ExpressionUUID->"24ce7a8f-ff06-46f5-9bfc-e45a6c3afed1"],
+Cell[6906, 189, 142, 2, 28, "Input",ExpressionUUID->"d2f40a5d-9b86-40da-ab47-c13143efa3fd"],
+Cell[7051, 193, 143, 2, 28, "Input",ExpressionUUID->"9dfc1f5a-f661-441a-87f8-0697b353a78e"],
+Cell[7197, 197, 141, 2, 28, "Input",ExpressionUUID->"361fb77a-c852-4e2f-b0e9-7d735c3b72e3"],
+Cell[7341, 201, 146, 2, 28, "Input",ExpressionUUID->"d1a49d5f-ab3d-43f9-873f-c8a0a0047481"],
+Cell[7490, 205, 131, 1, 28, "Input",ExpressionUUID->"eebaa3af-511f-4e32-86db-2054baa42d0f"],
+Cell[7624, 208, 143, 2, 28, "Input",ExpressionUUID->"c4ec0dbb-bfe3-4727-8b58-412cd4e57985"],
+Cell[7770, 212, 143, 2, 28, "Input",ExpressionUUID->"0a046822-5353-41b7-a601-e170a2b9d037"],
+Cell[7916, 216, 143, 2, 28, "Input",ExpressionUUID->"d7199b13-c934-4f10-9d22-ea8713af7cdc"],
+Cell[8062, 220, 131, 1, 28, "Input",ExpressionUUID->"027b092d-2fa7-4de1-b388-6a23bde5936a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8230, 226, 93, 0, 67, "Section",ExpressionUUID->"1068c518-306b-4b1a-92f9-b7aa35384ade"],
+Cell[8326, 228, 123, 0, 70, "Text",ExpressionUUID->"236ef79f-6b4d-4cff-8cae-d0ba3e14323f"],
+Cell[8452, 230, 116, 1, 70, "Input",ExpressionUUID->"10fa8b2f-aa14-43bd-9c25-cc97aef99a93"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8605, 236, 94, 0, 70, "Section",ExpressionUUID->"8a049536-66c9-472f-93d5-23a1e3a5d65d"],
+Cell[8702, 238, 102, 0, 70, "Text",ExpressionUUID->"dcfce077-8466-4679-9edc-62cd31ccb99f"],
+Cell[8807, 240, 116, 1, 70, "Input",ExpressionUUID->"eb41e283-2d02-407c-8888-ee473a30db7a"],
+Cell[8926, 243, 93, 0, 70, "Text",ExpressionUUID->"d575388b-b473-44c7-8e01-4315d341bbbb"],
+Cell[9022, 245, 127, 1, 70, "Input",ExpressionUUID->"24bd76ce-06ec-4e63-8d1d-d1228b4454ae"],
+Cell[9152, 248, 118, 0, 70, "Text",ExpressionUUID->"7e29ac60-f9a6-4f25-ae4f-24b291fbbab6"],
+Cell[9273, 250, 137, 2, 70, "Input",ExpressionUUID->"4853be9a-a079-499c-8eee-206103518a21"],
+Cell[9413, 254, 85, 0, 70, "Text",ExpressionUUID->"0a1f67bc-602c-4ab2-99d1-08b7c62088fc"],
+Cell[9501, 256, 161, 3, 70, "Input",ExpressionUUID->"337fb856-f929-4f58-9d75-28df12f6b8e7"],
+Cell[9665, 261, 94, 0, 70, "Text",ExpressionUUID->"679205c6-2396-44cc-9f17-10fb015517a5"],
+Cell[9762, 263, 565, 17, 70, "Input",ExpressionUUID->"30ff38cb-3482-47e8-be17-e1f1f14db88d"],
+Cell[10330, 282, 101, 0, 70, "Text",ExpressionUUID->"60e9e96c-5ea2-41ee-9423-c2ae55171794"],
+Cell[10434, 284, 318, 8, 70, "Input",ExpressionUUID->"1b3e94d2-32ab-41bf-8f87-8f7dc834f8c4"],
+Cell[10755, 294, 108, 0, 70, "Text",ExpressionUUID->"1ac46988-235d-4c62-9c96-4f824b90f815"],
+Cell[10866, 296, 640, 19, 70, "Input",ExpressionUUID->"31bf7080-ad02-4315-be8c-e8995d62c3cf"],
+Cell[11509, 317, 116, 0, 70, "Text",ExpressionUUID->"a31a9ea5-74da-4ca3-8c7f-9e6d9f0d7280"],
+Cell[11628, 319, 117, 1, 70, "Input",ExpressionUUID->"d90afae8-a743-4c6c-a852-1f4217533e90"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11782, 325, 109, 0, 70, "Section",ExpressionUUID->"b3fe5179-6257-4e99-b1ff-027292626ef6"],
+Cell[11894, 327, 254, 4, 70, "Text",ExpressionUUID->"f122c931-01d6-4ea8-a0e1-16954fb3e7a7"],
+Cell[12151, 333, 114, 1, 70, "Input",ExpressionUUID->"71f8f107-8afe-4433-8df2-1a5b5fdb0f51"],
+Cell[12268, 336, 145, 2, 70, "Text",ExpressionUUID->"69f0fef5-4c84-4d8f-9a68-400a31712081"],
+Cell[12416, 340, 131, 1, 70, "Input",ExpressionUUID->"cb594d03-6bfa-4662-860e-5397e3a15a9b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12584, 346, 101, 0, 70, "Section",ExpressionUUID->"9bf88a9c-2dd5-4bd0-8592-29b13f972cbc"],
+Cell[12688, 348, 102, 0, 70, "Text",ExpressionUUID->"0ab1f4de-3bcd-4525-9266-4e6cc7b9ab82"],
+Cell[12793, 350, 766, 22, 70, "Input",ExpressionUUID->"784aa014-93e2-4f0f-83a7-a63a3e4729f0"],
+Cell[13562, 374, 100, 0, 70, "Text",ExpressionUUID->"8390d479-112b-4366-bb33-9b8659c2cd0f"],
+Cell[13665, 376, 415, 11, 70, "Input",ExpressionUUID->"3cfe0d4b-1710-4b4e-9af2-ca54869a4686"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
